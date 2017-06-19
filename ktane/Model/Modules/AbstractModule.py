@@ -16,3 +16,12 @@ class AbstractModule:
         self.stage = 0
         self.state = ModuleState.Disarmed
         self.data = []
+
+    def import_from_string(self, string):
+        raise NotImplementedError
+
+    def export_to_string(self):
+        raise NotImplementedError
+
+    def translate_to_commands(self):
+        raise NotImplementedError

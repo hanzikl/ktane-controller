@@ -1,3 +1,5 @@
+import ktane
+
 def main():
     pass
 

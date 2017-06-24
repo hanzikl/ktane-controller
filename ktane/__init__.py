@@ -1,11 +1,15 @@
+import ktane.conf as config
 import time
 
-import serial
+if config.serial_mock:
+    from ktane.Mvc import serial_mock as serial
+else:
+    import serial
 
 from .Mvc.MessageController import MessageController
 from .Services.MessageService import MessageService
 
-connection = serial.Serial('/dev/ttyUSB0', 9600)
+connection = serial.Serial('/dev/ttyUSB0', 9600, config.serial_timeout)
 
 messageService = MessageService(connection)
 messageController = MessageController(connection)

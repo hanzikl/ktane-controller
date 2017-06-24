@@ -10,7 +10,6 @@ class MessageController:
 
         :param connection: serial.Serial
         """
-        assert isinstance(connection, serial.Serial)
         self.connection = connection
 
     def process_message(self, msg):

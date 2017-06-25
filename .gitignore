@@ -48,5 +48,9 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# pycache
+__pycache__
+
 # Idea itself
 .idea
+

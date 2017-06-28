@@ -10,13 +10,14 @@ if config.serial_mock:
 else:
     import serial
 
-connection = serial.Serial('/dev/ttyUSB0', 9600, config.serial_timeout)
+connection = serial.Serial('/dev/ttyUSB0', baudrate=9600, timeout=config.serial_timeout)
 
 messageService = DelayingMessageService(connection)
 messageService.prolong_delay(4)
 messageController = MessageController(connection)
 
-outputBuffer = ['ST1', 'SR 0 1 212 192']
+outputBuffer = ['SMT 2 7', 'SMS 2 2', 'SMT 1 2', 'SMS 1 2', 'SMT 0 1', 'SMS 0 1', 'I', 'SR 0 1 212 192', 'GMS', 'GMT',
+                'ST1']
 
 time.sleep(2)
 
@@ -24,4 +25,4 @@ while True:
     messageController.recieve_messages()
     messageService.tick()
     if outputBuffer:
-        messageService.add_delaying_message(outputBuffer.pop(), 5)
+        messageService.add_delaying_message(outputBuffer.pop(0), 1 / float(config.serial_message_rate))

@@ -1,6 +1,6 @@
 from enum import Enum
 
-from ktane.Model.Modules.AbstractModule import AbstractModule, ModuleState
+from .AbstractModule import AbstractModule, ModuleState
 
 
 class WireColors(Enum):
@@ -11,6 +11,9 @@ class WireColors(Enum):
     BLUE = 4
     YELLOW = 5
 
+
+def get_correct_wire(sequence):
+    raise NotImplementedError
 
 class WiresModule(AbstractModule):
     def export_to_string(self):

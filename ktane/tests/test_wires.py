@@ -26,6 +26,14 @@ class KnownValues(unittest.TestCase):
         (['white', 'missing', 'missing', 'red', 'yellow', 'red'], False, 3),
     )
 
+    def test_get_correct_wire_known_values(self):
+        """get_correct_wire should give known result for known value"""
+        for sequence, boolpar, number in self.known_values_rules:
+            result = WiresModule.get_correct_wire(sequence, boolpar)
+            self.assertEqual(number, result)
+
+
+class WiresSubroutines(unittest.TestCase):
     """known values for counting wires"""
     known_values_counting = (
         (['missing', 'missing', 'missing', 'missing', 'missing', 'missing'], 0),
@@ -39,16 +47,27 @@ class KnownValues(unittest.TestCase):
         (['red', 'white', 'blue', 'white', 'red', 'blue'], 6)
     )
 
-    def test_get_correct_wire_known_values(self):
-        """get_correct_wire should give known result for known value"""
-        for sequence, boolpar, number in self.known_values_rules:
-            result = WiresModule.get_correct_wire(sequence, boolpar)
-            self.assertEqual(number, result)
+    """known_values_nth_wire"""
+    known_values_nth = (
+        (['missing', 'missing', 'red', 'missing', 'yellow', 'blue'], 2, 4),
+        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], 4, 5),
+        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], 4, 5),
+        (['red', 'missing', 'missing', 'missing', 'missing', 'missing'], 1, 0),
+        (['blue', 'blue', 'red', 'missing', 'missing', 'missing'], 2, 1),
+        (['red', 'white', 'blue', 'white', 'red', 'blue'], 6, 5),
+        (['red', 'white', 'blue', 'white', 'red', 'blue'], 4, 3),
+    )
 
     def test_count_wires(self):
         """get_wires_count should give known result for known value"""
         for sequence, number in self.known_values_counting:
             result = WiresModule.get_wires_count(sequence)
+            self.assertEqual(number, result)
+
+    def test_nth_wire(self):
+        """get_nth_wire should give known result for known value"""
+        for sequence, n, number in self.known_values_nth:
+            result = WiresModule.get_nth_wire_position(sequence, n)
             self.assertEqual(number, result)
 
 

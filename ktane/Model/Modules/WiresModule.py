@@ -13,11 +13,15 @@ class WireColors(Enum):
 
 
 def get_correct_wire(sequence, boolpar):
-    raise NotImplementedError
+    wires_count = get_wires_count(sequence)
 
 
 def get_wires_count(sequence):
     return len([1 for x in sequence if x != WireColors.MISSING.value])
+
+
+def get_nth_wire_position(sequence, n):
+    NotImplementedError
 
 
 class WiresModule(AbstractModule):

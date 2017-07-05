@@ -21,7 +21,14 @@ def get_wires_count(sequence):
 
 
 def get_nth_wire_position(sequence, n):
-    NotImplementedError
+    counter = 0
+    for idx, value in enumerate(sequence):
+        if value != WireColors.MISSING.value:
+            counter += 1
+        if counter == n:
+            return idx
+
+    return None
 
 
 class WiresModule(AbstractModule):

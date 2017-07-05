@@ -4,7 +4,7 @@ from .AbstractModule import AbstractModule, ModuleState
 
 
 class WireColors(Enum):
-    MISSING = 'missing'
+    MISSING = ''
     BLACK = 'black'
     RED = 'red'
     WHITE = 'white'

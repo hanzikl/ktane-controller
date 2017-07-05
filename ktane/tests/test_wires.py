@@ -10,20 +10,20 @@ class KnownValues(unittest.TestCase):
         first wire has number 0
     """
     known_values_rules = (  # just random 3 wires
-        (['red', 'white', 'blue', 'missing', 'missing', 'missing'], True, 2),
-        (['white', 'yellow', 'blue', 'missing', 'missing', 'missing'], False, 1),
-        (['missing', 'white', 'yellow', 'missing', 'red', 'missing'], True, 4),
+        (['red', 'white', 'blue', '', '', ''], True, 2),
+        (['white', 'yellow', 'blue', '', '', ''], False, 1),
+        (['', 'white', 'yellow', '', 'red', ''], True, 4),
         # all cases of 3 wires rules
-        (['missing', 'missing', 'missing', 'yellow', 'yellow', 'blue'], False, 4),
-        (['missing', 'red', 'red', 'white', 'missing', 'missing'], True, 3),
-        (['blue', 'blue', 'red', 'missing', 'missing', 'missing'], False, 1),
-        (['missing', 'missing', 'red', 'missing', 'yellow', 'blue'], True, 5),
+        (['', '', '', 'yellow', 'yellow', 'blue'], False, 4),
+        (['', 'red', 'red', 'white', '', ''], True, 3),
+        (['blue', 'blue', 'red', '', '', ''], False, 1),
+        (['', '', 'red', '', 'yellow', 'blue'], True, 5),
         # all cases of 4 wires rules
-        (['red', 'missing', 'red', 'missing', 'yellow', 'blue'], True, 2),
-        (['missing', 'white', 'missing', 'yellow', 'blue', 'yellow'], True, 1),
-        (['red', 'missing', 'red', 'missing', 'yellow', 'blue'], False, 0),
-        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], True, 5),
-        (['white', 'missing', 'missing', 'red', 'yellow', 'red'], False, 3),
+        (['red', '', 'red', '', 'yellow', 'blue'], True, 2),
+        (['', 'white', '', 'yellow', 'blue', 'yellow'], True, 1),
+        (['red', '', 'red', '', 'yellow', 'blue'], False, 0),
+        (['', 'white', '', 'yellow', 'yellow', 'red'], True, 5),
+        (['white', '', '', 'red', 'yellow', 'red'], False, 3),
     )
 
     def test_get_correct_wire_known_values(self):
@@ -36,24 +36,24 @@ class KnownValues(unittest.TestCase):
 class WiresSubroutines(unittest.TestCase):
     """known values for counting wires"""
     known_values_counting = (
-        (['missing', 'missing', 'missing', 'missing', 'missing', 'missing'], 0),
-        (['red', 'missing', 'missing', 'missing', 'missing', 'missing'], 1),
-        (['missing', 'missing', 'missing', 'blue', 'missing', 'missing'], 1),
-        (['red', 'white', 'blue', 'missing', 'missing', 'missing'], 3),
-        (['missing', 'missing', 'red', 'missing', 'yellow', 'blue'], 3),
-        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], 4),
-        (['red', 'missing', 'red', 'missing', 'yellow', 'blue'], 4),
-        (['blue', 'missing', 'red', 'yellow', 'yellow', 'blue'], 5),
+        (['', '', '', '', '', ''], 0),
+        (['red', '', '', '', '', ''], 1),
+        (['', '', '', 'blue', '', ''], 1),
+        (['red', 'white', 'blue', '', '', ''], 3),
+        (['', '', 'red', '', 'yellow', 'blue'], 3),
+        (['', 'white', '', 'yellow', 'yellow', 'red'], 4),
+        (['red', '', 'red', '', 'yellow', 'blue'], 4),
+        (['blue', '', 'red', 'yellow', 'yellow', 'blue'], 5),
         (['red', 'white', 'blue', 'white', 'red', 'blue'], 6)
     )
 
     """known_values_nth_wire"""
     known_values_nth = (
-        (['missing', 'missing', 'red', 'missing', 'yellow', 'blue'], 2, 4),
-        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], 4, 5),
-        (['missing', 'white', 'missing', 'yellow', 'yellow', 'red'], 4, 5),
-        (['red', 'missing', 'missing', 'missing', 'missing', 'missing'], 1, 0),
-        (['blue', 'blue', 'red', 'missing', 'missing', 'missing'], 2, 1),
+        (['', '', 'red', '', 'yellow', 'blue'], 2, 4),
+        (['', 'white', '', 'yellow', 'yellow', 'red'], 4, 5),
+        (['', 'white', '', 'yellow', 'yellow', 'red'], 4, 5),
+        (['red', '', '', '', '', ''], 1, 0),
+        (['blue', 'blue', 'red', '', '', ''], 2, 1),
         (['red', 'white', 'blue', 'white', 'red', 'blue'], 6, 5),
         (['red', 'white', 'blue', 'white', 'red', 'blue'], 4, 3),
     )

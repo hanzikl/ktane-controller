@@ -16,7 +16,7 @@ class KnownValues(unittest.TestCase):
         # all cases of 3 wires rules
         (['missing', 'missing', 'missing', 'yellow', 'yellow', 'blue'], False, 4),
         (['missing', 'red', 'red', 'white', 'missing', 'missing'], True, 3),
-        (['blue', 'blue', 'red', 'missing', 'missing', 'missing'], False, 2),
+        (['blue', 'blue', 'red', 'missing', 'missing', 'missing'], False, 1),
         (['missing', 'missing', 'red', 'missing', 'yellow', 'blue'], True, 5),
         # all cases of 4 wires rules
         (['red', 'missing', 'red', 'missing', 'yellow', 'blue'], True, 2),

@@ -4,26 +4,27 @@ from .AbstractModule import AbstractModule, ModuleState
 
 
 class WireColors(Enum):
-    MISSING = 0
-    BLACK = 1
-    RED = 2
-    WHITE = 3
-    BLUE = 4
-    YELLOW = 5
+    MISSING = 'missing'
+    BLACK = 'black'
+    RED = 'red'
+    WHITE = 'white'
+    BLUE = 'blue'
+    YELLOW = 'yellow'
 
 
-def get_correct_wire(sequence):
+def get_correct_wire(sequence, boolpar):
     raise NotImplementedError
+
 
 class WiresModule(AbstractModule):
     def export_to_string(self):
-        pass
+        raise NotImplementedError
 
     def import_from_string(self, string):
-        pass
+        raise NotImplementedError
 
     def translate_to_commands(self):
-        pass
+        raise NotImplementedError
 
     def __init__(self):
         super().__init__()

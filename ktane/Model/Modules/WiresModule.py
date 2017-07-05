@@ -14,25 +14,49 @@ class WireColors(Enum):
 
 def get_correct_wire(sequence: list, boolpar):
     wires_count = get_wires_count(sequence)
+    sequence_reversed = sequence[::-1]
     if wires_count == 3:
         if count_wires_of_given_color(sequence, WireColors.RED.value) == 0:
             # no red wires
             return get_nth_wire_position(sequence, 2)
 
-        sequence_reversed = sequence[::-1]
         if sequence_reversed[get_nth_wire_position(sequence_reversed, 1)] \
                 == WireColors.WHITE.value:
-            # last wire is white
-            return len(sequence_reversed) - 1 - get_nth_wire_position(sequence_reversed, 1)
+            # last wire is white - cut the last wire
+            return get_nth_reversed_wire_position(sequence_reversed)
 
         blue_filtered_reversed = filter_color_in_sequence(
             sequence_reversed, WireColors.BLUE.value)
         if get_wires_count(blue_filtered_reversed) > 1:
             # more than one blue wire - cut the last blue
-            return len(sequence_reversed) - 1 - get_nth_wire_position(blue_filtered_reversed, 1)
+            return get_nth_reversed_wire_position(blue_filtered_reversed)
 
         # otherwise cut last wire
-        return len(sequence_reversed) - 1 - get_nth_wire_position(sequence_reversed, 1)
+        return get_nth_reversed_wire_position(sequence_reversed)
+
+    if wires_count == 4:
+        red_filtered_reversed = filter_color_in_sequence(
+            sequence_reversed, WireColors.RED.value)
+        if get_wires_count(red_filtered_reversed) > 1 and boolpar:
+            # more than one red and special condition - cut last red
+            return get_nth_reversed_wire_position(red_filtered_reversed)
+
+        if get_wires_count(red_filtered_reversed) == 0 \
+                and sequence_reversed[get_nth_wire_position(sequence_reversed, 1)] \
+                        == \
+                        WireColors.YELLOW.value:
+            # no red wires, last wire is yellow - cut first
+            return get_nth_wire_position(sequence)
+
+        if get_wires_count(filter_color_in_sequence(sequence, WireColors.BLUE.value)) == 1:
+            # one blue wire - cut first
+            return get_nth_wire_position(sequence)
+
+        if get_wires_count(filter_color_in_sequence(sequence, WireColors.YELLOW.value)) > 1:
+            # more than one yellow - cut last
+            return get_nth_reversed_wire_position(sequence_reversed)
+
+        return get_nth_wire_position(sequence, 2)
 
     return None
 
@@ -41,7 +65,7 @@ def get_wires_count(sequence):
     return len([1 for x in sequence if x != WireColors.MISSING.value])
 
 
-def get_nth_wire_position(sequence, n):
+def get_nth_wire_position(sequence, n=1):
     counter = 0
     for idx, value in enumerate(sequence):
         if value != WireColors.MISSING.value:
@@ -50,6 +74,10 @@ def get_nth_wire_position(sequence, n):
             return idx
 
     return None
+
+
+def get_nth_reversed_wire_position(sequence_reversed, n=1):
+    return len(sequence_reversed) - 1 - get_nth_wire_position(sequence_reversed, n)
 
 
 def filter_color_in_sequence(sequence, color):

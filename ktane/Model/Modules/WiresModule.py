@@ -58,6 +58,29 @@ def get_correct_wire(sequence: list, boolpar):
 
         return get_nth_wire_position(sequence, 2)
 
+    if wires_count == 5:
+        if boolpar and sequence_reversed[get_nth_wire_position(sequence_reversed, 1)] \
+                == \
+                WireColors.BLACK.value:
+            # last is black and special condition - cut fourth
+            return get_nth_wire_position(sequence, 4)
+
+        if get_wires_count(filter_color_in_sequence(
+                sequence, WireColors.RED.value)) == 1 \
+                and \
+                        get_wires_count(filter_color_in_sequence(
+                            sequence, WireColors.YELLOW.value)) > 1:
+            # one red and more than 1 yellow - cut first
+            return get_nth_wire_position(sequence)
+
+        if get_wires_count(filter_color_in_sequence(
+                sequence, WireColors.BLACK.value)) == 0:
+            # no black wires - cut second
+            return get_nth_wire_position(sequence, 2)
+
+        # cut first
+        return get_nth_wire_position(sequence)
+
     return None
 
 

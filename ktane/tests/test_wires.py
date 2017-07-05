@@ -24,6 +24,12 @@ class KnownValues(unittest.TestCase):
         (['red', '', 'red', '', 'yellow', 'blue'], False, 0),
         (['', 'white', '', 'yellow', 'yellow', 'red'], True, 5),
         (['white', '', '', 'red', 'yellow', 'red'], False, 3),
+        # all cases of 5 wires rules
+        (['red', '', 'red', 'blue', 'yellow', 'black'], True, 4),
+        (['blue', 'white', '', 'yellow', 'yellow', 'red'], False, 0),
+        (['', 'red', 'red', 'white', 'yellow', 'blue'], False, 2),
+        (['red', '', 'red', 'blue', 'yellow', 'black'], False, 0),
+        (['white', 'blue', 'red', 'black', '', 'black'], False, 0)
     )
 
     def test_get_correct_wire_known_values(self):

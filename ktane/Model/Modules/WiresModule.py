@@ -16,6 +16,10 @@ def get_correct_wire(sequence, boolpar):
     raise NotImplementedError
 
 
+def get_wires_count(sequence):
+    return len([1 for x in sequence if x != WireColors.MISSING.value])
+
+
 class WiresModule(AbstractModule):
     def export_to_string(self):
         raise NotImplementedError

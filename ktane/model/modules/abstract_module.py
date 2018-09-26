@@ -1,21 +1,23 @@
 from enum import Enum
+from ..model import Model
 
 
 class ModuleState(Enum):
-    Testing = 0
-    Disarmed = 1
-    Armed = 2
-    FailedToDisarm = 3
-    DisarmingInProgress = 4
+    TESTING = 0
+    DISARMED = 1
+    ARMED = 2
+    FAILED_TO_DISARM = 3
+    DISARMING_IN_PROGRESS = 4
 
 
 class AbstractModule:
-    def __init__(self):
+    def __init__(self, model: Model):
         self.name = "AbstractModule"
         self.type_number = -1
         self.stage = 0
-        self.state = ModuleState.Disarmed
+        self.state = ModuleState.DISARMED
         self.data = []
+        self.model = model
 
     def import_from_string(self, string):
         raise NotImplementedError

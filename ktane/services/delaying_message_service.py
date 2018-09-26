@@ -1,6 +1,6 @@
 import time
 
-from ktane.Services.MessageService import MessageService
+from ktane.services.message_service import MessageService
 
 
 class DelayingMessage:

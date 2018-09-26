@@ -1,6 +1,6 @@
 from enum import Enum
 
-from .AbstractModule import AbstractModule, ModuleState
+from .abstract_module import AbstractModule, ModuleState
 
 
 class WireColors(Enum):
@@ -43,8 +43,8 @@ def get_correct_wire(sequence: list, boolpar):
 
         if get_wires_count(red_filtered_reversed) == 0 \
                 and sequence_reversed[get_nth_wire_position(sequence_reversed, 1)] \
-                        == \
-                        WireColors.YELLOW.value:
+                == \
+                WireColors.YELLOW.value:
             # no red wires, last wire is yellow - cut first
             return get_nth_wire_position(sequence)
 
@@ -66,7 +66,7 @@ def get_correct_wire(sequence: list, boolpar):
             return get_nth_wire_position(sequence, 4)
 
         if count_wires_of_given_color(sequence, WireColors.RED.value) == 1 and \
-                        count_wires_of_given_color(sequence, WireColors.YELLOW.value) > 1:
+                count_wires_of_given_color(sequence, WireColors.YELLOW.value) > 1:
             # one red and more than 1 yellow - cut first
             return get_nth_wire_position(sequence)
 
@@ -83,7 +83,7 @@ def get_correct_wire(sequence: list, boolpar):
             return get_nth_wire_position(sequence, 3)
 
         if count_wires_of_given_color(sequence, WireColors.YELLOW.value) == 1 and \
-                        count_wires_of_given_color(sequence, WireColors.WHITE.value) > 1:
+                count_wires_of_given_color(sequence, WireColors.WHITE.value) > 1:
             # one yellow and more than one white - cut fourth
             return get_nth_wire_position(sequence, 4)
 
@@ -139,8 +139,18 @@ class WiresModule(AbstractModule):
     def translate_to_commands(self):
         raise NotImplementedError
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, model):
+        super().__init__(model)
         self.name = "WiresModule"
         self.type_number = 10
-        self.state = ModuleState.Armed
+        self.state = ModuleState.ARMED
+        self.wires_sequence = None
+
+    def get_correct_wire(self):
+        return get_correct_wire(self.wires_sequence, self.model.serial_number_contains_vowel)
+
+    def get_wires_count(self):
+        return get_wires_count(self.wires_sequence)
+
+    def get_nth_wire_position(self, n):
+        return get_nth_wire_position(self.wires_sequence, n)

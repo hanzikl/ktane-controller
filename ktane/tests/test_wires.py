@@ -1,7 +1,8 @@
 import sys, os
 
 sys.path.append(os.path.abspath('..'))
-from Model.Modules import WiresModule
+from model.modules.wires_module import WiresModule
+from model import Model
 import unittest
 
 
@@ -41,7 +42,12 @@ class KnownValues(unittest.TestCase):
     def test_get_correct_wire_known_values(self):
         """get_correct_wire should give known result for known value"""
         for sequence, boolpar, number in self.known_values_rules:
-            result = WiresModule.get_correct_wire(sequence, boolpar)
+            ktane_model = Model()
+            ktane_model.serial_number_contains_vowel = boolpar
+            wires_module = WiresModule(ktane_model)
+            wires_module.wires_sequence = sequence
+
+            result = wires_module.get_correct_wire()
             self.assertEqual(number, result)
 
 
@@ -72,14 +78,24 @@ class WiresSubroutines(unittest.TestCase):
 
     def test_count_wires(self):
         """get_wires_count should give known result for known value"""
+
+        ktane_model = Model()
+        wires_module = WiresModule(ktane_model)
+
         for sequence, number in self.known_values_counting:
-            result = WiresModule.get_wires_count(sequence)
+            wires_module.wires_sequence = sequence
+            result = wires_module.get_wires_count()
             self.assertEqual(number, result)
 
     def test_nth_wire(self):
         """get_nth_wire should give known result for known value"""
+
+        ktane_model = Model()
+        wires_module = WiresModule(ktane_model)
+
         for sequence, n, number in self.known_values_nth:
-            result = WiresModule.get_nth_wire_position(sequence, n)
+            wires_module.wires_sequence = sequence
+            result = wires_module.get_nth_wire_position(n)
             self.assertEqual(number, result)
 
 

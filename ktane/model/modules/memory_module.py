@@ -1,4 +1,4 @@
-from ktane.Model.Modules.AbstractModule import AbstractModule, ModuleState
+from ktane.model.modules.abstract_module import AbstractModule, ModuleState
 
 
 class MemoryModule(AbstractModule):
@@ -15,4 +15,4 @@ class MemoryModule(AbstractModule):
         super().__init__()
         self.name = "MemoryModule"
         self.type_number = 6
-        self.state = ModuleState.Armed
+        self.state = ModuleState.ARMED

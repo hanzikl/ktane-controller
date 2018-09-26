@@ -1,9 +1,9 @@
 def import_from_file(file):
     """
     :param file: file with model configuration
-    :return: new Model object
+    :return: new model object
     """
-    NotImplementedError
+    raise NotImplementedError
 
 
 class ModelImporter:

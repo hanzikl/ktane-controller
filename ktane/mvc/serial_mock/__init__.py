@@ -1,4 +1,4 @@
-from ktane.Mvc.serial_mock.Serial import Serial as MSerial
+from ktane.mvc.serial_mock.serial import Serial as MSerial
 
 
 def Serial(file, baudrate, timeout=0):

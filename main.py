@@ -8,3 +8,5 @@ console = logging.StreamHandler()
 console.setFormatter(
     logging.Formatter('[%(asctime)s %(levelname)1.1s] %(name)s: %(message)s'))
 log.addHandler(console)
+
+ktane.dumb_run()

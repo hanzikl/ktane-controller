@@ -99,5 +99,37 @@ class WiresSubroutines(unittest.TestCase):
             self.assertEqual(number, result)
 
 
+class TranslateCommandOnKnownValues(unittest.TestCase):
+    known_values_translations = (
+        # 3 wires rules
+        (['red', 'white', 'blue', '', '', ''], True, 3,
+         ['SMD 3 0 28 16 0 0 0']),
+        # 4 wires rules
+        (['red', '', 'red', '', 'yellow', 'blue'], True, 4,
+         ['SMD 4 0 212 16 0 0 0']),
+        # 5 wires rules
+        (['red', '', 'red', 'blue', 'yellow', 'black'], True, 1,
+         ['SMD 1 0 244 64 0 0 0']),
+        # 6 wires rules
+        (['white', 'blue', 'red', 'black', 'blue', 'black'], True, 0,
+         ['SMD 0 0 252 16 0 0 0']),
+    )
+
+    def test_translations(self):
+        """translate_to_commands should contain known result for given know module settings"""
+
+        for sequence, boolpar, module_number, translation in self.known_values_translations:
+            ktane_model = Model()
+            ktane_model.serial_number_contains_vowel = boolpar
+            wires_module = WiresModule(ktane_model)
+            wires_module.wires_sequence = sequence
+            wires_module.number = module_number
+
+            result = wires_module.translate_to_commands()
+
+            for item in translation:
+                self.assertTrue(item in result, "{} does not contain '{}'".format(result, item))
+
+
 if __name__ == "__main__":
     unittest.main()

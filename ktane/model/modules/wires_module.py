@@ -137,12 +137,26 @@ class WiresModule(AbstractModule):
         raise NotImplementedError
 
     def translate_to_commands(self):
-        raise NotImplementedError
+        commands = super().translate_to_commands()
+
+        mask = 0
+        counter = 2
+        for wire in self.wires_sequence:
+            counter *= 2
+            if wire != WireColors.MISSING.value:
+                mask += counter
+
+        correct_wire = self.get_correct_wire()
+        target_mask = 2**(2 + correct_wire)
+
+        commands.append("SMD {} 0 {} {} 0 0 0".format(self.number, mask, target_mask))
+
+        return commands
 
     def __init__(self, model):
         super().__init__(model)
         self.name = "WiresModule"
-        self.type_number = 10
+        self.type_number = 4
         self.state = ModuleState.ARMED
         self.wires_sequence = None
 

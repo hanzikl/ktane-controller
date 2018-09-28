@@ -18,6 +18,7 @@ class AbstractModule:
         self.state = ModuleState.DISARMED
         self.data = []
         self.model = model
+        self.number = 0
 
     def import_from_string(self, string):
         raise NotImplementedError
@@ -26,4 +27,14 @@ class AbstractModule:
         raise NotImplementedError
 
     def translate_to_commands(self):
-        raise NotImplementedError
+        # set module type command:
+        commands = ["SMT {} {}".format(self.number, self.type_number)]
+
+        # set module stage command:
+        if self.stage != 0:
+            commands.append("SMG {} {}".format(self.number, self.stage))
+
+        # set module state command
+        commands.append("SMS {} {}".format(self.number, self.state.value))
+
+        return commands

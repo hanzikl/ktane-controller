@@ -4,7 +4,7 @@ from ktane.model.indicators import Indicators
 from ktane.model.modules.abstract_module import AbstractModule, ModuleState
 
 
-class ButtonColors(Enum):
+class ButtonColor(Enum):
     BLACK = 'black'
     RED = 'red'
     WHITE = 'white'
@@ -37,22 +37,22 @@ class BigButtonModule(AbstractModule):
         find out correct behaviour of defuser
         :return:
         """
-        if self.color == ButtonColors.BLUE and self.text == ButtonText.ABORT:
+        if self.color == ButtonColor.BLUE and self.text == ButtonText.ABORT:
             return CorrectAction.PRESS_AND_HOLD
 
         if self.model.batteries_count > 1 and self.text == ButtonText.DETONATE:
             return CorrectAction.PRESS_AND_RELEASE
 
-        if self.color == ButtonColors.WHITE and self.model.contains_indicator(Indicators.CAR):
+        if self.color == ButtonColor.WHITE and self.model.contains_indicator(Indicators.CAR):
             return CorrectAction.PRESS_AND_HOLD
 
         if self.model.batteries_count > 2 and self.model.contains_indicator(Indicators.FRK):
             return CorrectAction.PRESS_AND_RELEASE
 
-        if self.color == ButtonColors.YELLOW:
+        if self.color == ButtonColor.YELLOW:
             return CorrectAction.PRESS_AND_HOLD
 
-        if self.color == ButtonColors.RED and self.text == ButtonText.HOLD:
+        if self.color == ButtonColor.RED and self.text == ButtonText.HOLD:
             return CorrectAction.PRESS_AND_RELEASE
 
         return CorrectAction.PRESS_AND_HOLD
